@@ -9,7 +9,7 @@ const port = process.env.PORT || 8000;
 var fs = require('fs')
 var multer  = require('multer')
 
-var filename = '../src/components/urlShortner/url-id.json'
+var filename = './url-id.json'
 var jsonData = require('./url-id.json')
 app.use(express.json());
 app.use(cors());
@@ -22,7 +22,7 @@ conn(); //calling function to connect db
 
 var con = mongoose.connection;
 app.get('/', (req,res)=>{
-    res.send("hello Api is Working")
+    res.send("hello Api is Working", Math.random())
 })
 
 
@@ -34,7 +34,7 @@ app.get('/req', (req,res) => {
     doc.find({},function(err, data) {
       if(err){
           console.log(err);
-      }
+      } 
       else{
           res.send(data);
       }
@@ -42,13 +42,6 @@ app.get('/req', (req,res) => {
     // res.send("working")
 });
 
-app.get('/*',(req,res)=>{
-  res.send('')
-})
-
-app.get(`/drocks`,(req,res)=>{
-    res.send("yoyoy")
-})
 
 
 
@@ -86,23 +79,28 @@ fs.writeFile(filename, JSON.stringify(jsonData), function writeJSON(err) {
 });
 })
 
-
+app.get(`/@`,(req,res)=>{
+  let p = req.query.p
+  // res.send(`this is the p ${p}`)
+  res.redirect(`https://app.example.io/${p}`);
+})
 
 
 
 //Inserting Data in the database
 app.post('/insert', (req, res) => {
+  // console.log(req.body," this is req we are getting")
     var newDoc = new doc({
       url: req.body.url,
-      shortUrl: `dshort@${jsonData['url-id']}.com`,
+      shortUrl: `dshort@?id=${jsonData['url-id']}.com`,
     })
     console.log(newDoc)
     newDoc.save((err,data)=>{
       if(err) console.log(err);
       else console.log("Data inserted")
     })
-    console.log(newDoc)
-    res.send("newDoc"); 
+    // console.log(newDoc)
+    res.json(jsonData['url-id']); 
   });
 
 var storage = multer.diskStorage({
