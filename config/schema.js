@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 // create a schema
 const docSchema = new Schema({
   // You may need to add other fields like owner
+  id: String,
   url: String,
   shortUrl: String,
   

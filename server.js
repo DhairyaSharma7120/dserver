@@ -43,6 +43,20 @@ app.get('/req', (req,res) => {
 });
 
 
+app.get('/find', (req,res) => {
+  
+  doc.find({
+    id: req.body.searchId
+  },function(err, data) {
+    if(err){
+        console.log(err);
+    } 
+    else{
+        res.send(data);
+    }
+});  
+  // res.send("working")
+});
 
 
 
@@ -91,6 +105,7 @@ app.get(`/@`,(req,res)=>{
 app.post('/insert', (req, res) => {
   // console.log(req.body," this is req we are getting")
     var newDoc = new doc({
+      
       url: req.body.url,
       shortUrl: `dshort@?${req.body.id + Math.floor((Math.random()*100)*Math.random()*200)}.com`,
     })
