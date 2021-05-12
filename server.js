@@ -22,7 +22,7 @@ conn(); //calling function to connect db
 
 var con = mongoose.connection;
 app.get('/', (req,res)=>{
-    res.send("hello Api is Working", Math.random())
+    res.send(`${Math.floor((Math.random() * 10) + 1)} hello Api is Working`)
 })
 
 
