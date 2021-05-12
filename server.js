@@ -36,14 +36,14 @@ app.get('/req', (req,res) => {
           console.log(err);
       } 
       else{
-          res.send(data);
+          console.log(data);
       }
   });  
     // res.send("working")
 });
 
 
-app.get('/find', (req,res) => {
+app.post('/find', (req,res) => {
   
   doc.find({
     id: req.body.searchId
