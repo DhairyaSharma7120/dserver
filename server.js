@@ -22,7 +22,7 @@ conn(); //calling function to connect db
 
 var con = mongoose.connection;
 app.get('/', (req,res)=>{
-    res.send(`${Math.floor((Math.random() * 40) + Math.floor((Math.random() * 10) + 200))*Math.floor((Math.random() * 10) + 200)*3} hello Api is Working`)
+    res.send(`hello Api is Working`)
 })
 
 
@@ -92,7 +92,7 @@ app.post('/insert', (req, res) => {
   // console.log(req.body," this is req we are getting")
     var newDoc = new doc({
       url: req.body.url,
-      shortUrl: `dshort@?id=${jsonData['url-id']}.com`,
+      shortUrl: `dshort@?${req.body.id + Math.floor((Math.random()*100)*Math.random()*200)}.com`,
     })
     console.log(newDoc)
     newDoc.save((err,data)=>{
