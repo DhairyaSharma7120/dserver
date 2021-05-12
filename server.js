@@ -100,7 +100,7 @@ app.post('/insert', (req, res) => {
       else console.log("Data inserted")
     })
     // console.log(newDoc)
-    res.json(jsonData['url-id']); 
+    res.json(`dshort@?${req.body.id + Math.floor((Math.random()*100)*Math.random()*200)}.com`); 
   });
 
 var storage = multer.diskStorage({
